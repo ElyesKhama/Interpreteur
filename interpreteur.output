@@ -1,0 +1,545 @@
+Grammaire
+
+    0 $accept: instructions $end
+
+    1 instructions: instr1 instructions
+    2             | instr2 instructions
+    3             | %empty
+
+    4 instr1: tADD tNB tNB tNB
+    5       | tMUL tNB tNB tNB
+    6       | tSOU tNB tNB tNB
+    7       | tDIV tNB tNB tNB
+    8       | tEQU tNB tNB tNB
+    9       | tINF tNB tNB tNB
+   10       | tINFE tNB tNB tNB
+   11       | tSUP tNB tNB tNB
+   12       | tSUPE tNB tNB tNB
+
+   13 instr2: tCOP tNB tNB
+   14       | tAFC tNB tNB
+   15       | tLOAD tNB tNB
+   16       | tSTORE tNB tNB
+   17       | tJMP tNB tNB
+   18       | tJMPC tNB tNB
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+$end (0) 0
+error (256)
+tADD (258) 4
+tMUL (259) 5
+tSOU (260) 6
+tDIV (261) 7
+tCOP (262) 13
+tAFC (263) 14
+tLOAD (264) 15
+tSTORE (265) 16
+tEQU (266) 8
+tINF (267) 9
+tINFE (268) 10
+tSUP (269) 11
+tSUPE (270) 12
+tJMP (271) 17
+tJMPC (272) 18
+tNB (273) 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (19)
+    à gauche: 0
+instructions (20)
+    à gauche: 1 2 3, à droite: 0 1 2
+instr1 (21)
+    à gauche: 4 5 6 7 8 9 10 11 12, à droite: 1
+instr2 (22)
+    à gauche: 13 14 15 16 17 18, à droite: 2
+
+
+État 0
+
+    0 $accept: . instructions $end
+
+    tADD    décalage et aller à l'état 1
+    tMUL    décalage et aller à l'état 2
+    tSOU    décalage et aller à l'état 3
+    tDIV    décalage et aller à l'état 4
+    tCOP    décalage et aller à l'état 5
+    tAFC    décalage et aller à l'état 6
+    tLOAD   décalage et aller à l'état 7
+    tSTORE  décalage et aller à l'état 8
+    tEQU    décalage et aller à l'état 9
+    tINF    décalage et aller à l'état 10
+    tINFE   décalage et aller à l'état 11
+    tSUP    décalage et aller à l'état 12
+    tSUPE   décalage et aller à l'état 13
+    tJMP    décalage et aller à l'état 14
+    tJMPC   décalage et aller à l'état 15
+
+    $défaut  réduction par utilisation de la règle 3 (instructions)
+
+    instructions  aller à l'état 16
+    instr1        aller à l'état 17
+    instr2        aller à l'état 18
+
+
+État 1
+
+    4 instr1: tADD . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 19
+
+
+État 2
+
+    5 instr1: tMUL . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 20
+
+
+État 3
+
+    6 instr1: tSOU . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 21
+
+
+État 4
+
+    7 instr1: tDIV . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 22
+
+
+État 5
+
+   13 instr2: tCOP . tNB tNB
+
+    tNB  décalage et aller à l'état 23
+
+
+État 6
+
+   14 instr2: tAFC . tNB tNB
+
+    tNB  décalage et aller à l'état 24
+
+
+État 7
+
+   15 instr2: tLOAD . tNB tNB
+
+    tNB  décalage et aller à l'état 25
+
+
+État 8
+
+   16 instr2: tSTORE . tNB tNB
+
+    tNB  décalage et aller à l'état 26
+
+
+État 9
+
+    8 instr1: tEQU . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 27
+
+
+État 10
+
+    9 instr1: tINF . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 28
+
+
+État 11
+
+   10 instr1: tINFE . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 29
+
+
+État 12
+
+   11 instr1: tSUP . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 30
+
+
+État 13
+
+   12 instr1: tSUPE . tNB tNB tNB
+
+    tNB  décalage et aller à l'état 31
+
+
+État 14
+
+   17 instr2: tJMP . tNB tNB
+
+    tNB  décalage et aller à l'état 32
+
+
+État 15
+
+   18 instr2: tJMPC . tNB tNB
+
+    tNB  décalage et aller à l'état 33
+
+
+État 16
+
+    0 $accept: instructions . $end
+
+    $end  décalage et aller à l'état 34
+
+
+État 17
+
+    1 instructions: instr1 . instructions
+
+    tADD    décalage et aller à l'état 1
+    tMUL    décalage et aller à l'état 2
+    tSOU    décalage et aller à l'état 3
+    tDIV    décalage et aller à l'état 4
+    tCOP    décalage et aller à l'état 5
+    tAFC    décalage et aller à l'état 6
+    tLOAD   décalage et aller à l'état 7
+    tSTORE  décalage et aller à l'état 8
+    tEQU    décalage et aller à l'état 9
+    tINF    décalage et aller à l'état 10
+    tINFE   décalage et aller à l'état 11
+    tSUP    décalage et aller à l'état 12
+    tSUPE   décalage et aller à l'état 13
+    tJMP    décalage et aller à l'état 14
+    tJMPC   décalage et aller à l'état 15
+
+    $défaut  réduction par utilisation de la règle 3 (instructions)
+
+    instructions  aller à l'état 35
+    instr1        aller à l'état 17
+    instr2        aller à l'état 18
+
+
+État 18
+
+    2 instructions: instr2 . instructions
+
+    tADD    décalage et aller à l'état 1
+    tMUL    décalage et aller à l'état 2
+    tSOU    décalage et aller à l'état 3
+    tDIV    décalage et aller à l'état 4
+    tCOP    décalage et aller à l'état 5
+    tAFC    décalage et aller à l'état 6
+    tLOAD   décalage et aller à l'état 7
+    tSTORE  décalage et aller à l'état 8
+    tEQU    décalage et aller à l'état 9
+    tINF    décalage et aller à l'état 10
+    tINFE   décalage et aller à l'état 11
+    tSUP    décalage et aller à l'état 12
+    tSUPE   décalage et aller à l'état 13
+    tJMP    décalage et aller à l'état 14
+    tJMPC   décalage et aller à l'état 15
+
+    $défaut  réduction par utilisation de la règle 3 (instructions)
+
+    instructions  aller à l'état 36
+    instr1        aller à l'état 17
+    instr2        aller à l'état 18
+
+
+État 19
+
+    4 instr1: tADD tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 37
+
+
+État 20
+
+    5 instr1: tMUL tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 38
+
+
+État 21
+
+    6 instr1: tSOU tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 39
+
+
+État 22
+
+    7 instr1: tDIV tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 40
+
+
+État 23
+
+   13 instr2: tCOP tNB . tNB
+
+    tNB  décalage et aller à l'état 41
+
+
+État 24
+
+   14 instr2: tAFC tNB . tNB
+
+    tNB  décalage et aller à l'état 42
+
+
+État 25
+
+   15 instr2: tLOAD tNB . tNB
+
+    tNB  décalage et aller à l'état 43
+
+
+État 26
+
+   16 instr2: tSTORE tNB . tNB
+
+    tNB  décalage et aller à l'état 44
+
+
+État 27
+
+    8 instr1: tEQU tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 45
+
+
+État 28
+
+    9 instr1: tINF tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 46
+
+
+État 29
+
+   10 instr1: tINFE tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 47
+
+
+État 30
+
+   11 instr1: tSUP tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 48
+
+
+État 31
+
+   12 instr1: tSUPE tNB . tNB tNB
+
+    tNB  décalage et aller à l'état 49
+
+
+État 32
+
+   17 instr2: tJMP tNB . tNB
+
+    tNB  décalage et aller à l'état 50
+
+
+État 33
+
+   18 instr2: tJMPC tNB . tNB
+
+    tNB  décalage et aller à l'état 51
+
+
+État 34
+
+    0 $accept: instructions $end .
+
+    $défaut  accepter
+
+
+État 35
+
+    1 instructions: instr1 instructions .
+
+    $défaut  réduction par utilisation de la règle 1 (instructions)
+
+
+État 36
+
+    2 instructions: instr2 instructions .
+
+    $défaut  réduction par utilisation de la règle 2 (instructions)
+
+
+État 37
+
+    4 instr1: tADD tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 52
+
+
+État 38
+
+    5 instr1: tMUL tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 53
+
+
+État 39
+
+    6 instr1: tSOU tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 54
+
+
+État 40
+
+    7 instr1: tDIV tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 55
+
+
+État 41
+
+   13 instr2: tCOP tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 13 (instr2)
+
+
+État 42
+
+   14 instr2: tAFC tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 14 (instr2)
+
+
+État 43
+
+   15 instr2: tLOAD tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 15 (instr2)
+
+
+État 44
+
+   16 instr2: tSTORE tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 16 (instr2)
+
+
+État 45
+
+    8 instr1: tEQU tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 56
+
+
+État 46
+
+    9 instr1: tINF tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 57
+
+
+État 47
+
+   10 instr1: tINFE tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 58
+
+
+État 48
+
+   11 instr1: tSUP tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 59
+
+
+État 49
+
+   12 instr1: tSUPE tNB tNB . tNB
+
+    tNB  décalage et aller à l'état 60
+
+
+État 50
+
+   17 instr2: tJMP tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 17 (instr2)
+
+
+État 51
+
+   18 instr2: tJMPC tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 18 (instr2)
+
+
+État 52
+
+    4 instr1: tADD tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 4 (instr1)
+
+
+État 53
+
+    5 instr1: tMUL tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 5 (instr1)
+
+
+État 54
+
+    6 instr1: tSOU tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 6 (instr1)
+
+
+État 55
+
+    7 instr1: tDIV tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 7 (instr1)
+
+
+État 56
+
+    8 instr1: tEQU tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 8 (instr1)
+
+
+État 57
+
+    9 instr1: tINF tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 9 (instr1)
+
+
+État 58
+
+   10 instr1: tINFE tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 10 (instr1)
+
+
+État 59
+
+   11 instr1: tSUP tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 11 (instr1)
+
+
+État 60
+
+   12 instr1: tSUPE tNB tNB tNB .
+
+    $défaut  réduction par utilisation de la règle 12 (instr1)
