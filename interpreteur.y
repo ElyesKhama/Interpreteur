@@ -4,7 +4,7 @@
 	#include <string.h>
 	int yylex(void);
 	int yyerror(char *);
-	#define lignemax 10
+	#define lignemax 100
 	#define NB_REGISTRES 16
 	#define TAILLE_MEMOIRE 50
 
@@ -21,6 +21,7 @@
 	int memoire[TAILLE_MEMOIRE];
 
 void initiateMem(){
+	printf("*******Initialisation de la mémoire à 0*******\n");
 	int i;	
 	for(i=0; i<TAILLE_MEMOIRE;i++){
 		memoire[i] = i;
@@ -30,7 +31,7 @@ void initiateMem(){
 void initiateReg(){
 	int i;	
 	for(i=0; i<NB_REGISTRES;i++){
-		registres[i] = i;
+		registres[i] = 0;
 	}
 }
 
@@ -76,15 +77,15 @@ void execute(){
 			}
 		}
 		else if(strcmp(tab_asm[i].instr,"INF") == 0){
-			if(registres[tab_asm[i].b]<registres[tab_asm[i].c]){
-				registres[tab_asm[i].a] = 1;			
+			if(registres[tab_asm[i].c]<registres[tab_asm[i].b]){
+				registres[tab_asm[i].a] = 1;
 			}
 			else{
 				registres[tab_asm[i].a] = 0;
 			}
 		}
 		else if(strcmp(tab_asm[i].instr,"INFE") == 0){
-			if(registres[tab_asm[i].b]<=registres[tab_asm[i].c]){
+			if(registres[tab_asm[i].c]<=registres[tab_asm[i].b]){
 				registres[tab_asm[i].a] = 1;			
 			}
 			else{
@@ -92,7 +93,7 @@ void execute(){
 			}
 		}
 		else if(strcmp(tab_asm[i].instr,"SUP") == 0){
-			if(registres[tab_asm[i].b]>registres[tab_asm[i].c]){
+			if(registres[tab_asm[i].c]>registres[tab_asm[i].b]){
 				registres[tab_asm[i].a] = 1;			
 			}
 			else{
@@ -100,7 +101,7 @@ void execute(){
 			}
 		}
 		else if(strcmp(tab_asm[i].instr,"SUPE") == 0){
-			if(registres[tab_asm[i].b]>=registres[tab_asm[i].c]){
+			if(registres[tab_asm[i].c]>=registres[tab_asm[i].b]){
 				registres[tab_asm[i].a] = 1;			
 			}
 			else{
@@ -120,7 +121,7 @@ void execute(){
 			memoire[tab_asm[i].a] = registres[tab_asm[i].b];	//a voir si on mets que dans a pour store
 		}
 		else if(strcmp(tab_asm[i].instr,"JMP") == 0){
-			i = tab_asm[i].a;								//a voir si on mets que dans a pour jmp
+			i = tab_asm[i].a;									//a voir si on mets que dans a pour jmp
 		}
 		else if(strcmp(tab_asm[i].instr,"JMPC") == 0){
 			if(registres[tab_asm[i].c] == 0){
@@ -149,7 +150,9 @@ void execute(){
 
 instructions: instr1 instructions
 			| instr2 instructions
+			| instr3 instructions
 			|
+			;
 
 
 instr1:  tADD tNB tNB tNB				{tab_asm[indice].ind = indice;tab_asm[indice].instr = $1;tab_asm[indice].a = $2;tab_asm[indice].b = $3;tab_asm[indice].c = $4;indice++;}
@@ -166,9 +169,9 @@ instr2: tCOP tNB tNB					{tab_asm[indice].ind = indice;tab_asm[indice].instr = $
 	|tAFC tNB tNB						{tab_asm[indice].ind = indice;tab_asm[indice].instr = $1;tab_asm[indice].a = $2; tab_asm[indice].b = $3;	indice++;}
 	|tLOAD tNB tNB						{tab_asm[indice].ind = indice;tab_asm[indice].instr = $1;tab_asm[indice].a = $2; tab_asm[indice].b = $3;	indice++;}
 	|tSTORE tNB tNB						{tab_asm[indice].ind = indice;tab_asm[indice].instr = $1;tab_asm[indice].a = $2; tab_asm[indice].b = $3;	indice++;}
-	|tJMP tNB tNB						{tab_asm[indice].ind = indice;tab_asm[indice].instr = $1;tab_asm[indice].a = $2; tab_asm[indice].b = $3;	indice++;}
 	|tJMPC tNB tNB						{tab_asm[indice].ind = indice;tab_asm[indice].instr = $1;tab_asm[indice].a = $2; tab_asm[indice].b = $3;	indice++;}
 
+instr3:	tJMP tNB						{tab_asm[indice].ind = indice;tab_asm[indice].instr = $1;tab_asm[indice].a = $2;indice++;}
 
 %%
 
@@ -182,9 +185,9 @@ int main() {
 	}
 	
 	initiateReg();
-	printReg();
+	printf("******Mémoire avant execution des instructions ******\n");
 	printMem();
 	execute();
-	printReg();
+	printf("******Mémoire après execution des instructions ******\n");
 	printMem();
 }
